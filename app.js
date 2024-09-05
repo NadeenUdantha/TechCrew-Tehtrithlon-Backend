@@ -7,6 +7,7 @@ const session = require('express-session')
 const passport = require('passport')
 
 const auth = require('./routes/auth')
+const visa = require('./routes/visa')
 const sequelize = require('./db')
 
 const app = express()
@@ -22,6 +23,7 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 app.use('/api/auth', auth)
+app.use('/api/visa', visa)
 
 sequelize.sync()
 
