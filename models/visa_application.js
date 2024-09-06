@@ -43,6 +43,6 @@ const VisaApplication = sequelize.define('VisaApplication', {
     },
 })
 
-User.hasOne(VisaApplication)
+User.hasMany(VisaApplication)
 
 module.exports = VisaApplication
