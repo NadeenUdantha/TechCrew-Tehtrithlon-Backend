@@ -8,13 +8,13 @@ passport.use(new LocalStrategy(async (username, password, done) => {
   try {
     const user = await User.findOne({
       where: {
-        username,
+        UserName: username,
       },
     })
     if (user === null)
       return done(null, false, { message: 'Incorrect username' })
 
-    if (!await bcrypt.compare(password, user.password))
+    if (!await bcrypt.compare(password, user.PasswordHash))
       return done(null, false, { message: 'Incorrect password' })
 
     return done(null, user)
@@ -24,12 +24,16 @@ passport.use(new LocalStrategy(async (username, password, done) => {
 }))
 
 passport.serializeUser((user, done) => {
-  done(null, user.username)
+  done(null, user.UserName)
 })
 
 passport.deserializeUser(async (username, done) => {
   try {
-    const user = await User.findByPk(username)
+    const user = await User.findOne({
+      where: {
+        UserName: username,
+      },
+    })
     done(null, user)
   } catch (err) {
     done(err)
@@ -46,13 +50,12 @@ router.post('/login',
 )
 
 router.post('/signup', async (req, res) => {
-  const { email, username, password, country } = req.body
+  const { email, username, password } = req.body
   try {
     const user = await User.create({
-      username,
-      password: await bcrypt.hash(password, 12),
-      email,
-      country,
+      UserName: username,
+      PasswordHash: await bcrypt.hash(password, 12),
+      Email: email,
     })
     res.status(200).send(user)
   } catch (err) {
