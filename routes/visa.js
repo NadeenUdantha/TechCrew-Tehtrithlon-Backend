@@ -1,7 +1,31 @@
 const express = require('express');
-const Visa = require('../models/visa');
+const VisaApplication = require('../models/visa_application');
 
 const router = express.Router();
+
+// {
+//     "fullName" : "Kasun Udara",
+//     "DOB" : 2001-03-20,
+//     "gender" : "Male",
+//     "nationality" : "Sri Lankan", 
+//     "placeOfBirth" : "Galle",
+//     "maritalStatus" : "Married", 
+//     "residentialAddress" : "3/29, Kalugddghg,gsdhgshdg",
+//     "phoneNumber" : "0767200006",
+//     "emailAddress" : "kasunu2001@gmail.com",
+//     "purposeOfVisit" : "fjdfdfdjf",
+//     "intendedDateOfArrival" : "2024-09-12",
+//     "intendedDurationOfStay" : "2 Weeks", 
+//     "addressInSriLanka" : "dhjhdjfhjdhfjdh",
+//     "previousVisitsToSriLanka" : "shdssdhd", 
+//     "recentPassport" : "hdjdfhjdhfdhfjdfjdhfjdhfjd",
+//     "scannedCopyOfPassportDataPage" : "hdffhfjhdjfhj",
+//     "AnyOtherSupportingDocuments" : "ghghghghghghgh",
+//     "trueAndAccurate" : True,
+//     "sriLankanLaw" : True,
+//     "agreeTermsAndConditions" : True,
+//     "signature" : "gfgfgffgfhjhjhkhk"
+//  }
 
 router.post('/create', async (req, res) => {
   const {
@@ -29,7 +53,7 @@ router.post('/create', async (req, res) => {
   } = req.body;
 
   try {
-    const visa = await Visa.create({
+    const visa = await VisaApplication.create({
       fullName,
       DOB,
       gender,
