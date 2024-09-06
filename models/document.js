@@ -3,31 +3,27 @@ const { DataTypes } = require('sequelize')
 const sequelize = require('../db')
 const VisaApplication = require('./visa_application')
 
-const Payment = sequelize.define('Payment', {
-    PaymentID: {
+const Document = sequelize.define('Document', {
+    DocumentID: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
         allowNull: false,
     },
-    Amount: {
-        type: DataTypes.DOUBLE,
+    DocumentType: {
+        type: DataTypes.STRING,
         allowNull: false,
     },
-    PaymentDate: {
+    FilePath: {
+        type: DataTypes.STRING,
+        allowNull: false,
+    },
+    UploadDate: {
         type: DataTypes.DATE,
-        allowNull: false,
-    },
-    PaymentStatus: {
-        type: DataTypes.STRING,
-        allowNull: false,
-    },
-    PaymentMethod: {
-        type: DataTypes.STRING,
         allowNull: false,
     },
 })
 
-VisaApplication.hasOne(Payment)
+VisaApplication.hasMany(Document)
 
-module.exports = Payment
+module.exports = Document

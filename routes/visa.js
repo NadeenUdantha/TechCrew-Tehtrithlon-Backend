@@ -1,7 +1,12 @@
-const express = require('express');
-const VisaApplication = require('../models/visa_application');
+const express = require('express')
 
-const router = express.Router();
+const VisaApplication = require('../models/visa_application')
+const Payment = require('../models/payment')
+const Document = require('../models/document')
+const ApplicationReview = require('../models/application_review')
+const OfficerAccount = require('../models/officer_account')
+
+const router = express.Router()
 
 // {
 //     "fullName" : "Kasun Udara",
@@ -50,7 +55,7 @@ router.post('/create', async (req, res) => {
     sriLankanLaw,
     agreeTermsAndConditions,
     signature
-  } = req.body;
+  } = req.body
 
   try {
     const visa = await VisaApplication.create({
@@ -75,11 +80,11 @@ router.post('/create', async (req, res) => {
       sriLankanLaw,
       agreeTermsAndConditions,
       signature
-    });
-    res.status(200).json(visa);
+    })
+    res.status(200).json(visa)
   } catch (err) {
-    res.status(500).json(err);
+    res.status(500).json(err)
   }
-});
+})
 
-module.exports = router;
+module.exports = router
