@@ -25,6 +25,8 @@ app.use(passport.session())
 app.use('/api/auth', auth)
 app.use('/api/visa', visa)
 
-sequelize.sync()
+sequelize.sync({
+    //alter: true,
+})
 
 module.exports = app
